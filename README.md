@@ -30,3 +30,41 @@ If you are developing a production application, we recommend enabling type-aware
 ```
 
 See the [Oxlint rules documentation](https://oxc.rs/docs/guide/usage/linter/rules) for the full list of rules and categories.
+
+
+Pre-mature Architecture
+
+src/
+│
+├── app/
+│   ├── router/
+│   ├── providers/
+│   └── layouts/
+│
+├── features/
+│   ├── auth/
+│   ├── dashboard/
+│   ├── workspaces/
+│   ├── documents/
+│   ├── notes/
+│   ├── search/
+│   ├── chat/
+│   └── settings/
+│
+├── components/
+│   ├── ui/
+│   ├── layout/
+│   └── feedback/
+│
+├── hooks/
+│
+├── services/
+│   ├── api/
+│   ├── auth/
+│   └── storage/
+│
+├── lib/
+│
+├── types/
+│
+└── utils/
