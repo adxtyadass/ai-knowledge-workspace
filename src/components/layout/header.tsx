@@ -1,4 +1,4 @@
-import { ArrowCounterClockwiseIcon, ListIcon } from "@phosphor-icons/react";
+import { ListIcon, UserCircleIcon } from "@phosphor-icons/react";
 
 interface IProps{
     sidebarOpen?: boolean;
@@ -15,10 +15,11 @@ export default function Header({ onToggleSidebar }: IProps) {
         >
           <ListIcon />
         </button>
-        AI <span className="text-green-600 font-bold">Knowledge</span> Workspace
+        <div>
+        AI<span className="text-primary font-bold">Knowledge</span> Workspace</div>
       </h2>
-      <span className="border border-gray-200 rounded-full p-3 cursor-pointer hover:opacity-90">
-        <ArrowCounterClockwiseIcon className="text-black" />
+      <span className="cursor-pointer hover:opacity-90">
+        <UserCircleIcon className="size-8 text-black" />
       </span>
     </nav>
   );

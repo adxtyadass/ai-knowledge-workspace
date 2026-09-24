@@ -18,7 +18,7 @@ export default function Sidebar({ isSidebarOpen }: { isSidebarOpen: boolean }) {
             to={item.href}
             className="flex items-center gap-3 px-4 py-3 text-sm hover:bg-gray-100"
           >
-            <Icon className="size-5 text-green-600 shrink-0" />
+            <Icon className="size-5 text-primary shrink-0" />
             <span>{item.label}</span>
           </Link>
         );
