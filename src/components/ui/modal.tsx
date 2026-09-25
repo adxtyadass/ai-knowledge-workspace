@@ -7,10 +7,11 @@ interface ModalProps {
   isOpen: boolean;
   onClose: () => void;
   children: React.ReactNode;
-  refCheck: any;
+  refCheck?: any;
+  heading?: string;
 }
 
-export default function Modal({ isOpen, onClose, children, refCheck }: ModalProps) {
+export default function Modal({ isOpen, onClose, children, refCheck, heading }: ModalProps) {
 
   const buttonRef = useRef<HTMLButtonElement>(null);
   const closeRef = useRef<HTMLButtonElement>(null);
@@ -35,12 +36,17 @@ export default function Modal({ isOpen, onClose, children, refCheck }: ModalProp
         }
       }}
     >
-      <div className="min-h-100 min-w-100 rounded-lg border border-transparent bg-white">
-        <div className="mb-3 flex w-full justify-end rounded-t-lg bg-green-600 p-3">
+      <div className="pb-4 min-h-10 min-w-100 rounded-lg border border-transparent bg-white">
+        <div
+          className={`mb-3 flex w-full justify-${
+            heading ? "between" : "end"
+          } rounded-t-lg bg-secondary p-3`}
+        >
+          <h3 className="text-white">{heading}</h3>
           <button
             ref={closeRef}
             onClick={onClose}
-            className="cursor-pointer text-black hover:text-white"
+            className="cursor-pointer text-white hover:text-white/80"
           >
             <X />
           </button>
