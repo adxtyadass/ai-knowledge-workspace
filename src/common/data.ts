@@ -9,7 +9,7 @@ export const sideBarItems = [
   {
     label: "Home",
     icon: HouseIcon,
-    href: "/",
+    href: "/home",
   },
   {
     label: "About",
@@ -25,5 +25,15 @@ export const sideBarItems = [
     label: "Directory",
     icon: AddressBookIcon,
     href: "/",
+  },
+];
+
+export const mockUsers = [
+  {
+    id: "user-1",
+    name: "Demo User",
+    email: "demo@example.com",
+    password: "password123",
+    role: "user",
   },
 ];

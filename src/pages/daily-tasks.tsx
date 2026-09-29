@@ -22,6 +22,8 @@
 import { PlusIcon } from "@phosphor-icons/react";
 import { useState } from "react";
 import Modal from "../components/ui/modal";
+import Input from "../components/ui/input";
+import Select from "../components/ui/select";
 
 export default function DailyTasksPage() {
     const [isOpen, setIsOpen] = useState(false)
@@ -51,48 +53,28 @@ export default function DailyTasksPage() {
           children={
             <>
               <div className="grid grid-cols-2 gap-5 px-4 py-2 text-base">
-                <div className="">
-                  <label className="block mb-2 font-medium text-gray-900">
-                    Task Name
-                  </label>
-                  <input
-                    className="border border-gray-200 px-2 rounded-md"
-                    placeholder="Enter task name"
-                    type="text"
-                  />
-                </div>
-                <div className="">
-                  <label className="block mb-2 font-medium text-gray-900">
-                    Priority
-                  </label>
-                  <select className="w-full border border-gray-200 px-2 rounded-md">
-                    <option value={"low"}>Low</option>
-                    <option value={"medium"}>Medium</option>
-                    <option value={"high"}>High</option>
-                  </select>
-                </div>
-                <div className="">
-                  <label className="block mb-2 font-medium text-gray-900">
-                    Due Date
-                  </label>
-                  <input
-                    className="w-full border border-gray-200 px-2 rounded-md"
-                    type="date"
-                  />
-                </div>
-                <div className="">
-                  <label className="block mb-2 font-medium text-gray-900">
-                    Category
-                  </label>
-                  <input
-                    className="w-full border border-gray-200 px-2 rounded-md"
-                    type="textarea"
-                    placeholder="Description..."
-                  />
-                </div>
+                <Input
+                  type="text"
+                  label="Task name"
+                  placeholder="Enter task name"
+                />
+                <Select label="Priority">
+                  <option value="low">Low</option>
+                  <option value="medium">Medium</option>
+                  <option value="high">High</option>
+                </Select>
+                <Input label="Due date" type="date" />
+                <Input
+                  type="textarea"
+                  label="Description"
+                  placeholder="Enter task description"
+                />
               </div>
               <div className="flex mt-5 justify-center px-4 gap-3 items-center w-full">
-                <button onClick={() => setIsOpen(false)} className="w-full hover:bg-red-50 cursor-pointer py-2 font-medium border border-red-500 rounded-md text-red-500 px-4">
+                <button
+                  onClick={() => setIsOpen(false)}
+                  className="w-full hover:bg-red-50 cursor-pointer py-2 font-medium border border-red-500 rounded-md text-red-500 px-4"
+                >
                   Cancel
                 </button>
                 <button className="w-full cursor-pointer py-2 font-medium bg-primary/60 rounded-md text-white px-4">
