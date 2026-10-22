@@ -1,35 +1,78 @@
+
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import Input from "../components/ui/input";
+import { useAuth } from "../context/AuthContext";
 
 export default function LoginPage() {
   const [data, setData] = useState({
     username: "",
     password: "",
   });
+
+  const [error, setError] = useState("");
+  const [isLoading, setIsLoading] = useState(false);
+
+  const { login } = useAuth();
+  const navigate = useNavigate();
+
+  const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+    setError("");
+    setIsLoading(true);
+
+    try {
+      await login(data.username, data.password);
+      navigate("/");
+    } catch {
+      setError("Invalid username or password");
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
   return (
-    <>
-      <div className="flex mt-10 mx-auto max-w-130 flex-col gap-6 items-center justify-center my-auto border border-gray-200 rounded-lg py-6">
-        <div className="border-b border-secondary">
-          AI<span className="text-primary font-bold">Knowledge</span> Workspace
-        </div>
-        <Input
-          label="Username"
-          type="text"
-          value={data.username}
-          name="username"
-          onChange={(e) => setData({ ...data, username: e.target.value })}
-        />
-        <Input
-          label="Password"
-          type="password"
-          value={data.password}
-          name="password"
-          onChange={(e) => setData({ ...data, password: e.target.value })}
-        />
-        <button className="w-full mx-auto max-w-70 cursor-pointer hover:opacity-90 bg-primary text-white px-4 py-2 rounded-lg">
-          Login
-        </button>
+    <form
+      onSubmit={handleSubmit}
+      className="flex mt-10 mx-auto max-w-130 flex-col gap-6 items-center justify-center my-auto border border-gray-200 rounded-lg py-6"
+    >
+      <div className="border-b border-secondary">
+        AI<span className="text-primary font-bold">Knowledge</span> Workspace
       </div>
-    </>
+
+      <Input
+        label="Username"
+        type="text"
+        name="username"
+        value={data.username}
+        onChange={(e) =>
+          setData({ ...data, username: e.target.value })
+        }
+      />
+
+      <Input
+        label="Password"
+        type="password"
+        name="password"
+        value={data.password}
+        onChange={(e) =>
+          setData({ ...data, password: e.target.value })
+        }
+      />
+
+      {error && <p className="text-red-500 text-sm">{error}</p>}
+
+      <button
+        type="submit"
+        disabled={isLoading}
+        className="w-full mx-auto max-w-70 cursor-pointer hover:opacity-90 disabled:opacity-60 bg-primary text-white px-4 py-2 rounded-lg"
+      >
+        {isLoading ? "Logging in..." : "Login"}
+      </button>
+
+      <p className="text-sm text-gray-500">
+        Demo: admin/admin or demo/demo
+      </p>
+    </form>
   );
 }

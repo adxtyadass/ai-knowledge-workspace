@@ -1,4 +1,5 @@
 import { ListIcon, UserCircleIcon } from "@phosphor-icons/react";
+import { Link } from "react-router-dom";
 
 interface IProps{
     sidebarOpen?: boolean;
@@ -18,9 +19,9 @@ export default function Header({ onToggleSidebar }: IProps) {
         <div>
         AI<span className="text-primary font-bold">Knowledge</span> Workspace</div>
       </h2>
-      <span className="cursor-pointer hover:opacity-90">
+      <Link to={'/login'} className="cursor-pointer hover:opacity-90">
         <UserCircleIcon className="size-8 text-black" />
-      </span>
+      </Link>
     </nav>
   );
 }

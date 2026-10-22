@@ -1,4 +1,6 @@
-import { createContext, useState } from "react";
+
+import { createContext, useContext, useState } from "react";
+import type { ReactNode } from "react";
 import type { User } from "../types/auth";
 
 interface AuthContextValue {
@@ -10,29 +12,27 @@ interface AuthContextValue {
 
 const AuthContext = createContext<AuthContextValue | null>(null);
 
-export function AuthProvider({ children }: { children: React.ReactNode }) {
+export function AuthProvider({ children }: { children: ReactNode }) {
   const [user, setUser] = useState<User | null>(null);
 
-  const handleLogin = async (
+  const login = async (
     username: string,
     password: string
   ): Promise<void> => {
     if (username === "admin" && password === "admin") {
-      setUser({
-        id: "1",
-        username,
-        role: "admin",
-      });
-    } else {
-      setUser({
-        id: "2",
-        username,
-        role: "user",
-      });
+      setUser({ id: "1", username, role: "admin" });
+      return;
     }
+
+    if (username === "demo" && password === "demo") {
+      setUser({ id: "2", username, role: "user" });
+      return;
+    }
+
+    throw new Error("Invalid username or password");
   };
 
-  const handleLogout = () => {
+  const logout = () => {
     setUser(null);
   };
 
@@ -40,12 +40,22 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
     <AuthContext.Provider
       value={{
         user,
-        isAuthenticated: !!user,
-        login: handleLogin,
-        logout: handleLogout,
+        isAuthenticated: user !== null,
+        login,
+        logout,
       }}
     >
       {children}
     </AuthContext.Provider>
   );
+}
+
+export function useAuth() {
+  const context = useContext(AuthContext);
+
+  if (context === null) {
+    throw new Error("useAuth must be used within an AuthProvider");
+  }
+
+  return context;
 }
