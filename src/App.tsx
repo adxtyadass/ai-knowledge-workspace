@@ -8,8 +8,8 @@ import LoginPage from "./pages/login-page";
 function App() {
   return (
     <Routes>
+      <Route path="/login" element={<LoginPage />} />
       <Route element={<AppLayout />}>
-        <Route path="/" element={<LoginPage />} />
         <Route path="/home" element={<Home />} />
         <Route path="/about" element={<AboutPage />} />
         <Route path="/daily-task" element={<DailyTasksPage />} />
