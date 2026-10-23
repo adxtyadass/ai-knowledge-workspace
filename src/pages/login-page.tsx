@@ -32,9 +32,10 @@ export default function LoginPage() {
   };
 
   return (
+    <div className="pt-30 h-full w-full bg-gray-100">
     <form
       onSubmit={handleSubmit}
-      className="flex mt-10 mx-auto max-w-130 flex-col gap-6 items-center justify-center my-auto border border-gray-200 rounded-lg py-6"
+      className="flex mx-auto bg-white max-w-130 flex-col gap-6 items-center justify-center my-auto border border-gray-200 rounded-lg py-6"
     >
       <div className="border-b border-secondary">
         AI<span className="text-primary font-bold">Knowledge</span> Workspace
@@ -73,6 +74,6 @@ export default function LoginPage() {
       <p className="text-sm text-gray-500">
         Demo: admin/admin or demo/demo
       </p>
-    </form>
+    </form></div>
   );
 }
