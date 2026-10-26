@@ -11,7 +11,7 @@ const selectionGridItems: SelectionGridItem[] = [
   {
     title: "Add Daily Tasks",
     icon: ChecksIcon,
-    url: 'daily-task'
+    url: '/daily-task'
   },
   {
     title: "Ask Your agent",
