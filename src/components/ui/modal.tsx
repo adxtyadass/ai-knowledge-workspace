@@ -29,56 +29,38 @@ export default function Modal({ isOpen, onClose, children, refCheck, heading }: 
 
   return createPortal(
     <div
-      className="fixed inset-0 z-50 flex items-center justify-center bg-black/30 backdrop-blur-2xl"
+      className="fixed inset-0 z-50 flex items-center justify-center bg-jet-black/40 backdrop-blur-sm"
       onClick={(event) => {
         if (event.target === event.currentTarget) {
           onClose();
         }
       }}
     >
-      <div className="pb-4 min-h-10 min-w-100 rounded-lg border border-transparent bg-white">
+      <div className="w-full max-w-lg animate-[fadeInScale_0.2s_ease-out] overflow-hidden rounded-2xl border border-white/20 bg-white shadow-2xl shadow-black/10">
+        {/* Header */}
         <div
-          className={`mb-3 flex w-full justify-${
-            heading ? "between" : "end"
-          } rounded-t-lg bg-secondary p-3`}
+          className={`flex w-full items-center border-b border-slate-100 px-5 py-4 ${
+            heading ? "justify-between" : "justify-end"
+          }`}
         >
-          <h3 className="text-white">{heading}</h3>
+          {heading && (
+            <h3 className="text-[15px] font-semibold text-dark">{heading}</h3>
+          )}
           <button
             ref={closeRef}
             onClick={onClose}
-            className="cursor-pointer text-white hover:text-white/80"
+            className="flex size-8 cursor-pointer items-center justify-center rounded-lg text-muted transition-colors hover:bg-slate-100 hover:text-dark"
           >
-            <X />
+            <X className="size-4" weight="bold" />
           </button>
         </div>
 
-        {children}
+        {/* Body */}
+        <div className="p-5">
+          {children}
+        </div>
       </div>
     </div>,
     document.body
   );
 }
-
-// export default function Modal({ isOpen, onClose, children }: ModalProps) {
-//   if (!isOpen) return null;
-
-//   return createPortal(
-//     <div
-//       className="fixed inset-0 bg-black/30 backdrop-blur-2xl flex items-center justify-center z-50"
-//       onClick={onClose}
-//     >
-//       <div onClick={(e) => e.stopPropagation()} className="rounded-lg border min-w-100 min-h-100 border-transparent bg-white">
-//         <div className="mb-3 bg-green-600 w-full rounded-t-lg flex justify-end p-3">
-//           <button
-//             onClick={onClose}
-//             className="cursor-pointer text-black hover:text-white"
-//           >
-//             <X />
-//           </button>
-//         </div>
-//         {children}
-//       </div>
-//     </div>,
-//     document.body
-//   );
-// }

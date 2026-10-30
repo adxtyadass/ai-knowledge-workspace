@@ -5,12 +5,23 @@ interface ColumnProps{
 
 export default function Table({ columns }: { columns: ColumnProps[] }) {
   return (
-    <div className="overflow-x-auto">
-      <table className="min-w-full divide-y divide-gray-200 border border-gray-300">
-        <thead className="bg-gray-50">
-          {columns.map((item) => <tr key={item.key}>{item.name}</tr>)}
+    <div className="overflow-hidden rounded-xl border border-slate-200/60 bg-white shadow-sm">
+      <table className="min-w-full divide-y divide-slate-100">
+        <thead className="bg-slate-50/80">
+          <tr>
+            {columns.map((item) => (
+              <th
+                key={item.key}
+                className="px-4 py-3 text-left text-xs font-semibold uppercase tracking-wider text-muted"
+              >
+                {item.name}
+              </th>
+            ))}
+          </tr>
         </thead>
-        <tbody className="bg-white divide-y divide-gray-200">{children}</tbody>
+        <tbody className="divide-y divide-slate-50 bg-white">
+          {/* children rows go here */}
+        </tbody>
       </table>
     </div>
   );

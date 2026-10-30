@@ -35,24 +35,28 @@ const features = [
     title: "AI-Powered Insights",
     description:
       "Leverage intelligent suggestions and automated workflows to surface the knowledge that matters most.",
+    color: "text-violet-500 bg-violet-50",
   },
   {
     icon: LightningIcon,
     title: "Lightning Fast",
     description:
       "Optimized for speed — search, organize, and retrieve your knowledge base in milliseconds.",
+    color: "text-amber-500 bg-amber-50",
   },
   {
     icon: ShieldCheckIcon,
     title: "Secure by Default",
     description:
       "Enterprise-grade security with role-based access and end-to-end encryption for all your data.",
+    color: "text-emerald-500 bg-emerald-50",
   },
   {
     icon: UsersThreeIcon,
     title: "Team Collaboration",
     description:
       "Work together seamlessly with shared workspaces, real-time updates, and smart task delegation.",
+    color: "text-blue-500 bg-blue-50",
   },
 ];
 
@@ -96,15 +100,15 @@ export default function AIKnowledgeWorkspace() {
   const uptime = useCountUp(99, 1800, statsVisible);
 
   return (
-    <div className="min-h-screen bg-white text-jet-black overflow-x-hidden">
+    <div className="min-h-screen bg-white text-dark overflow-x-hidden">
       {/* ── Shared Header ──────────────────────────────────────── */}
       <Header />
 
       {/* ── Hero ────────────────────────────────────────────────── */}
-      <section className="relative flex min-h-[calc(100vh-65px)] items-center justify-center px-6">
+      <section className="relative flex min-h-[calc(100vh-64px)] items-center justify-center px-6">
         {/* Subtle gradient orbs */}
-        <div className="pointer-events-none absolute -top-40 left-1/4 h-[500px] w-[500px] rounded-full bg-primary/10 blur-[120px]" />
-        <div className="pointer-events-none absolute -bottom-20 right-1/4 h-[400px] w-[400px] rounded-full bg-secondary/10 blur-[100px]" />
+        <div className="pointer-events-none absolute -top-40 left-1/4 h-[500px] w-[500px] rounded-full bg-primary/8 blur-[120px]" />
+        <div className="pointer-events-none absolute -bottom-20 right-1/4 h-[400px] w-[400px] rounded-full bg-secondary/8 blur-[100px]" />
 
         <div className="relative mx-auto max-w-4xl text-center">
           <FadeInUp delay={100}>
@@ -115,16 +119,16 @@ export default function AIKnowledgeWorkspace() {
           </FadeInUp>
 
           <FadeInUp delay={250}>
-            <h1 className="mt-6 text-5xl font-bold leading-tight tracking-tight text-jet-black sm:text-6xl lg:text-7xl">
+            <h1 className="mt-6 text-5xl font-bold leading-tight tracking-tight text-dark sm:text-6xl lg:text-7xl">
               Work smarter.
               <br />
-              <span className="text-primary">Think</span>{" "}
+              <span className="bg-gradient-to-r from-primary to-indigo-400 bg-clip-text text-transparent">Think</span>{" "}
               <span className="italic text-secondary">faster.</span>
             </h1>
           </FadeInUp>
 
           <FadeInUp delay={450}>
-            <p className="mx-auto mt-6 max-w-2xl text-lg leading-relaxed text-gray-500">
+            <p className="mx-auto mt-6 max-w-2xl text-lg leading-relaxed text-muted">
               Your AI-powered knowledge workspace that organizes, surfaces, and
               connects information — so you can focus on what actually matters.
             </p>
@@ -134,14 +138,14 @@ export default function AIKnowledgeWorkspace() {
             <div className="mt-10 flex flex-col items-center justify-center gap-4 sm:flex-row">
               <Link
                 to="/login"
-                className="group inline-flex items-center gap-2 rounded-xl bg-primary px-8 py-3.5 text-base font-semibold text-white shadow-lg shadow-primary/25 transition-all hover:shadow-xl hover:shadow-primary/30 hover:opacity-95 active:scale-[0.97]"
+                className="group inline-flex items-center gap-2 rounded-xl bg-primary px-8 py-3.5 text-base font-semibold text-white shadow-lg shadow-primary/25 transition-all hover:bg-primary-hover hover:shadow-xl hover:shadow-primary/30 active:scale-[0.97]"
               >
                 Get Started Free
                 <ArrowRightIcon className="size-4 transition-transform group-hover:translate-x-1" />
               </Link>
               <a
                 href="#features"
-                className="inline-flex items-center gap-2 rounded-xl border border-gray-200 px-8 py-3.5 text-base font-semibold text-jet-black transition-all hover:border-primary hover:text-primary"
+                className="inline-flex items-center gap-2 rounded-xl border border-slate-200 px-8 py-3.5 text-base font-semibold text-dark transition-all hover:border-primary/40 hover:text-primary"
               >
                 Learn More
               </a>
@@ -150,26 +154,17 @@ export default function AIKnowledgeWorkspace() {
 
           {/* Trust badges */}
           <FadeInUp delay={800}>
-            <div className="mt-16 flex flex-wrap items-center justify-center gap-x-8 gap-y-2 text-sm text-gray-400">
+            <div className="mt-16 flex flex-wrap items-center justify-center gap-x-8 gap-y-2 text-sm text-muted">
               <span className="flex items-center gap-1.5">
-                <CheckCircleIcon
-                  className="size-4 text-teal"
-                  weight="fill"
-                />
+                <CheckCircleIcon className="size-4 text-teal" weight="fill" />
                 No credit card required
               </span>
               <span className="flex items-center gap-1.5">
-                <CheckCircleIcon
-                  className="size-4 text-teal"
-                  weight="fill"
-                />
+                <CheckCircleIcon className="size-4 text-teal" weight="fill" />
                 Free plan available
               </span>
               <span className="flex items-center gap-1.5">
-                <CheckCircleIcon
-                  className="size-4 text-teal"
-                  weight="fill"
-                />
+                <CheckCircleIcon className="size-4 text-teal" weight="fill" />
                 Cancel anytime
               </span>
             </div>
@@ -178,7 +173,7 @@ export default function AIKnowledgeWorkspace() {
       </section>
 
       {/* ── Stats ───────────────────────────────────────────────── */}
-      <section className="border-y border-gray-100 bg-lavender/30 py-16">
+      <section className="border-y border-slate-100 bg-gradient-to-r from-lavender/40 via-white to-lavender/40 py-16">
         <div className="mx-auto grid max-w-5xl grid-cols-1 gap-10 px-6 sm:grid-cols-3">
           {[
             { value: users.toLocaleString() + "+", label: "Active Users" },
@@ -186,10 +181,10 @@ export default function AIKnowledgeWorkspace() {
             { value: uptime + ".9%", label: "Uptime SLA" },
           ].map((stat) => (
             <FadeInUp key={stat.label} delay={900} className="text-center">
-              <div className="text-4xl font-bold text-jet-black">
+              <div className="text-4xl font-bold text-dark">
                 {stat.value}
               </div>
-              <div className="mt-1 text-sm text-gray-500">{stat.label}</div>
+              <div className="mt-1 text-sm text-muted">{stat.label}</div>
             </FadeInUp>
           ))}
         </div>
@@ -203,27 +198,27 @@ export default function AIKnowledgeWorkspace() {
               <span className="text-xs font-semibold uppercase tracking-widest text-primary">
                 Features
               </span>
-              <h2 className="mt-3 text-3xl font-bold tracking-tight text-jet-black sm:text-4xl">
+              <h2 className="mt-3 text-3xl font-bold tracking-tight text-dark sm:text-4xl">
                 Everything you need, nothing you don't.
               </h2>
-              <p className="mx-auto mt-4 max-w-xl text-gray-500">
+              <p className="mx-auto mt-4 max-w-xl text-muted">
                 A minimalist workspace packed with powerful capabilities —
                 designed for individuals and teams who value clarity.
               </p>
             </div>
           </FadeInUp>
 
-          <div className="mt-16 grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-4">
+          <div className="mt-16 grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-4">
             {features.map((feature, index) => (
               <FadeInUp key={feature.title} delay={400 + index * 150}>
-                <div className="group rounded-2xl border border-gray-100 bg-white p-6 transition-all duration-300 hover:border-primary/30 hover:shadow-lg hover:shadow-primary/5 hover:-translate-y-1">
-                  <div className="mb-4 inline-flex rounded-xl bg-primary/10 p-3 text-primary transition-colors group-hover:bg-primary group-hover:text-white">
-                    <feature.icon className="size-6" weight="duotone" />
+                <div className="group rounded-2xl border border-slate-200/60 bg-white/70 p-6 backdrop-blur-sm transition-all duration-300 hover:-translate-y-1 hover:border-primary/20 hover:bg-white hover:shadow-lg hover:shadow-primary/5">
+                  <div className={`mb-4 inline-flex rounded-xl p-3 ${feature.color} transition-transform group-hover:scale-110`}>
+                    <feature.icon className="size-5" weight="duotone" />
                   </div>
-                  <h3 className="text-base font-semibold text-jet-black">
+                  <h3 className="text-[15px] font-semibold text-dark">
                     {feature.title}
                   </h3>
-                  <p className="mt-2 text-sm leading-relaxed text-gray-500">
+                  <p className="mt-2 text-sm leading-relaxed text-muted">
                     {feature.description}
                   </p>
                 </div>
@@ -236,29 +231,29 @@ export default function AIKnowledgeWorkspace() {
       {/* ── CTA Banner ──────────────────────────────────────────── */}
       <section className="px-6 pb-24">
         <FadeInUp delay={200}>
-          <div className="relative mx-auto max-w-5xl overflow-hidden rounded-3xl bg-jet-black px-8 py-16 text-center sm:px-16">
+          <div className="relative mx-auto max-w-5xl overflow-hidden rounded-3xl bg-gradient-to-br from-slate-900 to-slate-800 px-8 py-16 text-center sm:px-16">
             {/* decorative gradient */}
             <div className="pointer-events-none absolute -right-20 -top-20 h-60 w-60 rounded-full bg-primary/20 blur-[80px]" />
-            <div className="pointer-events-none absolute -bottom-20 -left-20 h-60 w-60 rounded-full bg-secondary/15 blur-[80px]" />
+            <div className="pointer-events-none absolute -bottom-20 -left-20 h-60 w-60 rounded-full bg-indigo-500/15 blur-[80px]" />
 
             <h2 className="relative text-3xl font-bold text-white sm:text-4xl">
               Ready to transform how you work?
             </h2>
-            <p className="relative mx-auto mt-4 max-w-lg text-base text-pale-sky/80">
+            <p className="relative mx-auto mt-4 max-w-lg text-base text-slate-400">
               Join thousands of professionals who use AI Knowledge Workspace to
               stay organized, collaborative, and ahead of the curve.
             </p>
             <div className="relative mt-8 flex flex-col items-center justify-center gap-4 sm:flex-row">
               <Link
                 to="/login"
-                className="group inline-flex items-center gap-2 rounded-xl bg-primary px-8 py-3.5 text-base font-semibold text-white shadow-lg shadow-primary/30 transition-all hover:shadow-xl hover:opacity-95 active:scale-[0.97]"
+                className="group inline-flex items-center gap-2 rounded-xl bg-primary px-8 py-3.5 text-base font-semibold text-white shadow-lg shadow-primary/30 transition-all hover:bg-primary-hover hover:shadow-xl active:scale-[0.97]"
               >
                 Start for Free
                 <ArrowRightIcon className="size-4 transition-transform group-hover:translate-x-1" />
               </Link>
               <Link
                 to="/login"
-                className="inline-flex items-center gap-2 rounded-xl border border-white/20 px-8 py-3.5 text-base font-semibold text-white transition-all hover:border-white/50 hover:bg-white/5"
+                className="inline-flex items-center gap-2 rounded-xl border border-white/15 px-8 py-3.5 text-base font-semibold text-white transition-all hover:border-white/30 hover:bg-white/5"
               >
                 Sign In
               </Link>
@@ -268,23 +263,18 @@ export default function AIKnowledgeWorkspace() {
       </section>
 
       {/* ── Footer ──────────────────────────────────────────────── */}
-      <footer className="border-t border-gray-100 bg-white px-6 py-10">
+      <footer className="border-t border-slate-100 bg-white px-6 py-10">
         <div className="mx-auto flex max-w-6xl flex-col items-center justify-between gap-4 sm:flex-row">
-          <span className="text-sm text-gray-400 select-none">
-            © {new Date().getFullYear()} AI
-            <span className="text-primary font-semibold">Knowledge</span>{" "}
-            Workspace. All rights reserved.
+          <span className="flex items-center gap-2 text-sm text-muted select-none">
+            <div className="flex size-6 items-center justify-center rounded-md bg-primary text-[10px] font-bold text-white">
+              AI
+            </div>
+            © {new Date().getFullYear()} Knowledge Workspace
           </span>
-          <div className="flex gap-6 text-sm text-gray-400">
-            <a href="#" className="transition hover:text-jet-black">
-              Privacy
-            </a>
-            <a href="#" className="transition hover:text-jet-black">
-              Terms
-            </a>
-            <a href="#" className="transition hover:text-jet-black">
-              Contact
-            </a>
+          <div className="flex gap-6 text-sm text-muted">
+            <a href="#" className="transition hover:text-dark">Privacy</a>
+            <a href="#" className="transition hover:text-dark">Terms</a>
+            <a href="#" className="transition hover:text-dark">Contact</a>
           </div>
         </div>
       </footer>

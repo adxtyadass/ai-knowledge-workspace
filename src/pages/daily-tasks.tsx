@@ -1,87 +1,82 @@
-// const tasks = [
-//     {
-//         id: 1,
-//         title: "Task 1",
-//         description: "This is the first task.",
-//         completed: false,
-//     },
-//     {
-//         id: 2,
-//         title: "Task 2",
-//         description: "This is the second task.",
-//         completed: true,
-//     },
-//     {
-//         id: 3,
-//         title: "Task 3",
-//         description: "This is the third task.",
-//         completed: false,
-//     }
-// ]
-
 import { PlusIcon } from "@phosphor-icons/react";
 import { useState } from "react";
 import Modal from "../components/ui/modal";
-import Input from "../components/ui/input";
-import Select from "../components/ui/select";
+import AddDailyTask from "../components/daily-tasks/add-form";
+import type { Task } from "../types/types";
+import TasksGrid from "../components/daily-tasks/tasks-grid";
 
 export default function DailyTasksPage() {
     const [isOpen, setIsOpen] = useState(false)
+    const [tasks, setTasks] = useState<Task[]>([]);
+
+    const handleCreateTask = (newTask: Task) => {
+      setTasks((prevTasks) => [...prevTasks, newTask]);
+    }
+
+    const handleToggle = (id: string) => {
+      setTasks((prevTasks) =>
+        prevTasks.map((task) =>
+          task.id === id ? { ...task, completed: !task.completed } : task
+        )
+      );
+    }
+
+    const handleEdit = (id: string) => {
+      setTasks((prev) => prev.map((task) => task.id === id ? {...task, id: task.id, description: task.description, title: task.title} : task))
+      setIsOpen(true)
+    }
+
     return (
-      <div className="flex flex-col gap-8 bg-gray-100 p-4 min-h-screen">
-        <div className="flex flex-col items-center justify-center">
-          <div className="flex gap-4 mt-9">
-            <h2 className="text-dark text-5xl font-medium tracking-tight">
+      <div className="flex min-h-full flex-col gap-8 bg-linear-to-b from-background to-white p-6 lg:p-10">
+        {/* Header */}
+        <div className="flex flex-col items-center justify-center pt-6">
+          <div className="flex items-center gap-3">
+            <h2 className="text-4xl font-bold tracking-tight text-dark">
               Daily Tasks
             </h2>
             <button
               onClick={() => setIsOpen(true)}
               title="Add your task"
-              className="cursor-pointer hover:bg-primary/10 hover:border-secondary hover:border text-primary bg-primary/20 rounded-full px-4"
+              className="flex size-10 cursor-pointer items-center justify-center rounded-xl bg-primary text-white shadow-sm shadow-primary/20 transition-all hover:bg-primary-hover hover:shadow-md hover:shadow-primary/25 active:scale-95"
             >
-              <PlusIcon className="size-5 text-secondary" />
+              <PlusIcon className="size-5" weight="bold" />
             </button>
           </div>
-          <p className="text-gray-500 mt-4 text-lg italic">
+          <p className="mt-3 text-base text-muted">
             Manage your daily tasks here.
           </p>
         </div>
+
+        {/* Empty state */}
+        {tasks.length ? (
+          <TasksGrid onEdit={handleEdit} tasks={tasks} handleToggle={handleToggle}/>)
+        : 
+        <div className="mx-auto flex max-w-md flex-col items-center justify-center rounded-2xl border border-dashed border-slate-200 bg-white/50 px-8 py-16 text-center backdrop-blur-sm">
+          <div className="mb-4 flex size-16 items-center justify-center rounded-2xl bg-slate-100">
+            <PlusIcon className="size-7 text-muted" />
+          </div>
+          <h3 className="text-[15px] font-semibold text-dark">No tasks yet</h3>
+          <p className="mt-1 text-sm text-muted">
+            Create your first task to get started
+          </p>
+          <button
+            onClick={() => setIsOpen(true)}
+            className="mt-5 cursor-pointer rounded-lg bg-primary px-5 py-2 text-sm font-medium text-white shadow-sm shadow-primary/20 transition-all hover:bg-primary-hover hover:shadow-md active:scale-[0.97]"
+          >
+            Add Task
+          </button>
+        </div>}
+
+        {/* Modal */}
         <Modal
-          heading="Add your task here"
+          heading="Create new task"
           onClose={() => setIsOpen(false)}
           isOpen={isOpen}
           children={
-            <>
-              <div className="grid grid-cols-2 gap-5 px-4 py-2 text-base">
-                <Input
-                  type="text"
-                  label="Task name"
-                  placeholder="Enter task name"
-                />
-                <Select label="Priority">
-                  <option value="low">Low</option>
-                  <option value="medium">Medium</option>
-                  <option value="high">High</option>
-                </Select>
-                <Input label="Due date" type="date" />
-                <Input
-                  type="textarea"
-                  label="Description"
-                  placeholder="Enter task description"
-                />
-              </div>
-              <div className="flex mt-5 justify-center px-4 gap-3 items-center w-full">
-                <button
-                  onClick={() => setIsOpen(false)}
-                  className="w-full hover:bg-red-50 cursor-pointer py-2 font-medium border border-red-500 rounded-md text-red-500 px-4"
-                >
-                  Cancel
-                </button>
-                <button className="w-full cursor-pointer py-2 font-medium bg-primary/60 rounded-md text-white px-4">
-                  Submit
-                </button>
-              </div>
-            </>
+           <AddDailyTask handleSubmit={(newTask) => {
+            handleCreateTask(newTask);
+            setIsOpen(false);
+           } } handleCancel={() => setIsOpen(false)}/> 
           }
         />
       </div>

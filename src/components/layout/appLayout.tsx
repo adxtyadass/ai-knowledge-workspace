@@ -6,10 +6,10 @@ import { useAuth } from "../../context/AuthContext";
 
 export default function AppLayout() {
   const [isSidebarOpen, setIsSidebarOpen] = useState(true);
-  const {isAuthenticated} = useAuth()
+  const { isAuthenticated } = useAuth();
 
   return (
-    <div className="flex h-screen flex-col">
+    <div className="flex h-screen flex-col bg-background">
       <Header onToggleSidebar={() => setIsSidebarOpen((prev) => !prev)} />
 
       <div className="flex flex-1 overflow-hidden">

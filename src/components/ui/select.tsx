@@ -9,12 +9,12 @@ export default function Select({
   label: string;
 }) {
   return (
-    <div className="flex flex-col gap-1">
-      <label className="text-base font-medium leading-6">{label}</label>
+    <div className="flex flex-col gap-1.5">
+      <label className="text-[13px] font-medium text-slate-700">{label}</label>
 
       <select
         {...props}
-        className={`border border-gray-200 rounded-lg px-4 py-2 ${className}`}
+        className={`w-full appearance-none rounded-lg border border-slate-200 bg-white/80 px-3.5 py-2 text-sm text-dark shadow-sm backdrop-blur-sm transition-all focus:border-primary focus:outline-none focus:ring-2 focus:ring-primary/20 ${className}`}
       >
         {children}
       </select>
