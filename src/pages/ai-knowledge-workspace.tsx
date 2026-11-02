@@ -114,7 +114,7 @@ export default function AIKnowledgeWorkspace() {
           <FadeInUp delay={100}>
             <span className="mb-6 inline-flex items-center gap-2 rounded-full border border-primary/20 bg-primary/5 px-4 py-1.5 text-xs font-medium text-primary">
               <RocketLaunchIcon className="size-3.5" weight="fill" />
-              Now in Beta — Try it free
+              Try for free
             </span>
           </FadeInUp>
 

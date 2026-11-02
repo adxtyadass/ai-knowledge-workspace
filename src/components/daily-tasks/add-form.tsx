@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import type { Task } from "../../types/types";
 import Input from "../ui/input";
 import Select from "../ui/select";
@@ -6,18 +6,25 @@ import Select from "../ui/select";
 interface AddDailyTaskProps {
     handleCancel: () => void;
     handleSubmit: (data: Task) => void;
+    initialData: Task | null;
 }
+export const emptyTask: Task = {
+    id: "",
+    title: "",
+    priority: "low",
+    dueDate: "",
+    description: "",
+    completed: false,
+    createdAt: "",
+};
+export default function AddDailyTask({ handleCancel, handleSubmit, initialData }: AddDailyTaskProps) {
+    const [data, setData] = useState<Task>({...emptyTask});
 
-export default function AddDailyTask({ handleCancel, handleSubmit }: AddDailyTaskProps) {
-    const [data, setData] = useState<Task>({
-        id: "",
-        title: "",
-        priority: "low",
-        dueDate: "",
-        description: "",
-        completed: false,
-        createdAt: "",
-    })
+    useEffect(() => {
+        if(initialData){
+            setData(initialData)
+        } else setData({...emptyTask})
+    },[initialData])
 
     const handleChange = (
         field: "title" | "priority" | "dueDate" | "description",
@@ -30,20 +37,24 @@ export default function AddDailyTask({ handleCancel, handleSubmit }: AddDailyTas
     };
 
     const onSubmit = () => {
-        const newTask: Task = {
-            ...data,
-            id: crypto.randomUUID(),
-            createdAt: new Date().toISOString(),
-        };
-
-        handleSubmit(newTask);
+        if (initialData) {
+            handleSubmit({
+                ...data,
+                id: initialData.id,
+                createdAt: initialData.createdAt,
+            });
+        } else {
+            handleSubmit({
+                ...data,
+                id: crypto.randomUUID(),
+                createdAt: new Date().toISOString(),
+            });
+        }
     };
 
     const isValid =
         data.title.trim() &&
-        data.priority &&
-        data.dueDate &&
-        data.description.trim();
+        data.dueDate;
 
     return (
         <>
@@ -90,7 +101,7 @@ export default function AddDailyTask({ handleCancel, handleSubmit }: AddDailyTas
                hover:bg-primary-hover hover:shadow-md active:scale-[0.98]
                disabled:cursor-not-allowed disabled:opacity-50 disabled:shadow-none disabled:hover:bg-primary disabled:hover:shadow-none disabled:active:scale-100"
                 >
-                    Create Task
+                    {initialData ? "Update Task" : "Create Task"}
                 </button>
             </div>
         </>

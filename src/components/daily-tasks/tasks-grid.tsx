@@ -1,7 +1,10 @@
 import { CheckIcon } from "@phosphor-icons/react";
 import type { Task } from "../../types/types";
 
-export default function TasksGrid({ tasks, handleToggle, onEdit }: { tasks: Task[], handleToggle: (taskId: string) => void, onEdit: (taskId: string) => void }) {
+interface TasksGridProps {
+    tasks: Task[], handleToggle: (taskId: string) => void, onEdit: (taskId: string) => void, onDelete: (taskId: string) => void
+}
+export default function TasksGrid({ tasks, handleToggle, onEdit, onDelete }: TasksGridProps) {
     return (
         <div className="grid grid-cols-1 gap-10 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 mt-8">
             {tasks?.map((task) =>
@@ -9,11 +12,10 @@ export default function TasksGrid({ tasks, handleToggle, onEdit }: { tasks: Task
                     <button
                         title="Mark as completed"
                         onClick={() => handleToggle(task.id)}
-                        className={`z-1 absolute -left-3 -top-3 flex size-7 cursor-pointer items-center justify-center rounded-full border-2 transition-all focus:outline-none focus:ring-2 focus:ring-green-500 ${
-                            task.completed
-                                ? "border-green-400 bg-green-400"
-                                : "border-slate-300 bg-white hover:border-green-400"
-                        }`}
+                        className={`z-1 absolute -left-3 -top-3 flex size-7 cursor-pointer items-center justify-center rounded-full border-2 transition-all focus:outline-none focus:ring-2 focus:ring-green-500 ${task.completed
+                            ? "border-green-400 bg-green-400"
+                            : "border-slate-300 bg-white hover:border-green-400"
+                            }`}
                     >
                         {task.completed && <CheckIcon className="size-4 text-white" weight="bold" />}
                     </button>
@@ -25,14 +27,14 @@ export default function TasksGrid({ tasks, handleToggle, onEdit }: { tasks: Task
                             </span>
                         </div>
                         <div className={`text-sm ${task.completed ? 'text-dark' : 'text-muted'}`}>
-                        {task.dueDate && <p>Due: {new Date(task.dueDate).toLocaleDateString()}</p>}
-                        {task.description && <p>{task.description}</p>}
+                            {task.dueDate && <p>Due: {new Date(task.dueDate).toLocaleDateString()}</p>}
+                            {task.description && <p>{task.description}</p>}
                         </div>
                         <div className="flex items-center justify-end gap-2 w-full">
-                            <button onClick={() => onEdit(task.id)} className="px-2 py-0.5 text-sm bg-gray-100 cursor-pointer rounded hover:bg-gray-200 transition-all">
+                            {!task?.completed && <button onClick={() => onEdit(task.id)} className="px-2 py-0.5 text-sm bg-gray-100 cursor-pointer rounded hover:bg-gray-200 transition-all">
                                 Edit
-                            </button>
-                            <button className="px-2 py-0.5 text-sm bg-red100 border border-red-600 text-red-700 cursor-pointer rounded hover:bg-red-200 transition-all">
+                            </button>}
+                            <button onClick={() => onDelete(task.id)} className="px-2 py-0.5 text-sm border border-red-600 text-red-700 cursor-pointer rounded hover:bg-red-200 transition-all">
                                 Delete
                             </button>
                         </div>
