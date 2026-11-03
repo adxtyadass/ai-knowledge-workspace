@@ -7,6 +7,7 @@ import Home from "./pages/home";
 import DailyTasksPage from "./pages/daily-tasks";
 import LoginPage from "./pages/login-page";
 import AIKnowledgeWorkspace from "./pages/ai-knowledge-workspace";
+import AskAIPage from "./pages/ask-ai";
 
 function App() {
   return (
@@ -21,6 +22,7 @@ function App() {
           <Route path="/home" element={<Home />} />
           <Route path="/about" element={<AboutPage />} />
           <Route path="/daily-task" element={<DailyTasksPage />} />
+          <Route path="/ask-ai" element={<AskAIPage />} />
         </Route>
       </Route>
     </Routes>

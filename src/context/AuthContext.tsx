@@ -12,27 +12,44 @@ interface AuthContextValue {
 
 const AuthContext = createContext<AuthContextValue | null>(null);
 
+const STORAGE_KEY = "auth_user";
+
 export function AuthProvider({ children }: { children: ReactNode }) {
-  const [user, setUser] = useState<User | null>(null);
+
+  // Restore previously authenticated user
+  const [user, setUser] = useState<User | null>(() => {
+    try {
+      const storedUser = localStorage.getItem(STORAGE_KEY);
+
+      return storedUser ? JSON.parse(storedUser) as User : null;
+    } catch {
+      localStorage.removeItem(STORAGE_KEY);
+      return null;
+    }
+  });
 
   const login = async (
     username: string,
     password: string
   ): Promise<void> => {
+
+    let authenticatedUser: User;
+
     if (username === "admin" && password === "admin") {
-      setUser({ id: "1", username, role: "admin" });
-      return;
+      authenticatedUser = { id: "1", username, role: "admin" };
+    } else if (username === "demo" && password === "demo") {
+      authenticatedUser = { id: "2", username, role: "user" };
+    } else {
+      throw new Error("Invalid username or password");
     }
 
-    if (username === "demo" && password === "demo") {
-      setUser({ id: "2", username, role: "user" });
-      return;
-    }
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(authenticatedUser));
 
-    throw new Error("Invalid username or password");
+    setUser(authenticatedUser);
   };
 
   const logout = () => {
+    localStorage.removeItem(STORAGE_KEY);
     setUser(null);
   };
 

@@ -22,6 +22,7 @@ const selectionGridItems: SelectionGridItem[] = [
     title: "Ask AI Agent",
     description: "Get instant answers from your AI assistant",
     icon: OpenAiLogoIcon,
+    url: '/ask-ai',
     color: "text-violet-500 bg-violet-50",
   },
   {
