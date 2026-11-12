@@ -1,0 +1,13 @@
+String: ID is represented as a string in TypeScript.
+
+
+
+@id: Makes it the primary key.
+
+
+
+@default(uuid()): Automatically generates a unique ID.
+
+
+
+@db.Uuid: Stores it using PostgreSQL's native UUID type.

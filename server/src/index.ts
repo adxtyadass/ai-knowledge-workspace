@@ -65,7 +65,7 @@ function aiQueryHandler(app: Express) {
 
       // Create a new chat with previous conversation history
       const chat = ai.chats.create({
-        model: "gemini-3.8-flash",
+        model: "gemini-3.5-flash-lite",
         history: geminiHistory,
       });
 
